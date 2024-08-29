@@ -1,6 +1,9 @@
 # EXPERIMENT--02-INTEFACING-A-DIGITAL-INPUT-TO-ARM-DEVELOPMENT-BOARD
-## Aim: To Interface a Digital Input  (userpush button  ) to ARM   development board and write a  program to obtain  the data and flash the led  
-## Components required: STM32 CUBE IDE, ARM IOT development board,  STM programmer tool.
+
+## Aim: To Interface a Digital Input  (userpush button  ) to ARM   development board and write a  program to obtain  the data and flash the led 
+
+## Components required: STM32 CUBE IDE, ARM IOT development board,  STM programmer tool.4
+
 ## Theory 
 The full form of an ARM is an advanced reduced instruction set computer (RISC) machine, and it is a 32-bit processor architecture expanded by ARM holdings. The applications of an ARM processor include several microcontrollers as well as processors. The architecture of an ARM processor was licensed by many corporations for designing ARM processor-based SoC products and CPUs. This allows the corporations to manufacture their products using ARM architecture. Likewise, all main semiconductor companies will make ARM-based SOCs such as Samsung, Atmel, TI etc.
 
@@ -51,13 +54,44 @@ The full form of an ARM is an advanced reduced instruction set computer (RISC) m
 
 
 ## STM 32 CUBE PROGRAM :
+```
+#include "main.h"
+#include "stdbool.h"
+void push_button();
+bool button_status;
+
+while (1)
+{
+	  push_button();
+}
 
 
+void push_button()
+{
+	button_status= HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_0);
+	if(button_status==1)
+	{
+		HAL_GPIO_WritePin(GPIOB,GPIO_PIN_0,GPIO_PIN_SET);
+		HAL_Delay(500);
+		HAL_GPIO_WritePin(GPIOB,GPIO_PIN_0,GPIO_PIN_RESET);
+		HAL_Delay(500);
+  	}
+	else
+	{
+		HAL_GPIO_WritePin(GPIOB,GPIO_PIN_0,GPIO_PIN_RESET);
+				HAL_Delay(500);
+	}
+}
+```
 
 ## Output  :
- 
+
+![Screenshot 2024-08-29 210715](https://github.com/user-attachments/assets/453a9d49-8a1f-429e-a834-a24b03573245)
+
+
 ## layout of the circuit 
- 
- 
+![Screenshot 2024-08-29 210726](https://github.com/user-attachments/assets/bb166e6e-df82-4fcf-bab0-8c0a2b0bfa31)
+
+
 ## Result :
 Interfacing a digital Input (Pushbutton ) with ARM microcontroller based IOT development is executed and the results are verified.
